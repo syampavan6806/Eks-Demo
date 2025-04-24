@@ -1,0 +1,2 @@
+bucket = "terraform-qa-state-bucket-msatech"
+key = "eks/terraform.tfstate"
