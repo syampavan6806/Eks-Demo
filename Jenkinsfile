@@ -44,7 +44,7 @@ stage('approval') {
   script {
     def plan = readFile 'tfplan.txt'
     input message: "Apply the plan?",
-    parameter: [text(name: 'plan', description: 'please reveiw the plan', defaultValue: plan)]
+    parameters: [text(name: 'plan', description: 'please reveiw the plan', defaultValue: plan)]
     }
   }
 }
@@ -76,7 +76,7 @@ stage('destroy'){
   script {
      def plan = readFile 'tfplan.txt'
      input message: "Delete the stack?",
-     parameter: [text(name: 'plan', description: 'please reveiw the plan', defaultValue: plan)]
+     parameters: [text(name: 'plan', description: 'please reveiw the plan', defaultValue: plan)]
     }
    sh 'terraform destroy -no-color --auto-approve'
    }
