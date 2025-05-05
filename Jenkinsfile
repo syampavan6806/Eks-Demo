@@ -16,7 +16,7 @@ stages{
    stage('init') {
       steps{
         sh 'rm -rf .terraform'
-        sh 'terraform init -no-color -backend-config="${ENVIRONMENT}/{ENVIRONMENT}.tfbackend"'
+        sh 'terraform init -no-color -backend-config=${ENVIRONMENT}/${ENVIRONMENT}.tfbackend'
    }
   }
 
@@ -31,7 +31,7 @@ stage('plan') {
       expression { params.action == 'plan' || params.action == 'apply' }
   }
     steps {
-      sh 'terraform plan -no-color -input=false -out=tfplan --var-file="${ENVIRONMENT}/{ENVIRONMENT}.tfvars"'
+      sh 'terraform plan -no-color -input=false -out=tfplan --var-file="${ENVIRONMENT}/${ENVIRONMENT}.tfvars"'
     }
 }
 
@@ -63,7 +63,7 @@ stage('preview-destroy') {
     expression { params.action == 'destroy' }
     }
    steps {
-     sh 'terraform plan -no-color -destroy -out=tfplan --var-file=${ENVIRONMENT}/{ENVIRONMENT}.tfvars'
+     sh 'terraform plan -no-color -destroy -out=tfplan --var-file=${ENVIRONMENT}/${ENVIRONMENT}.tfvars'
      sh 'terraform show -no-color tfplan > tfplan.txt'
    }
 }
